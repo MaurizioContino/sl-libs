@@ -1,9 +1,12 @@
 {
-  "name": "sl-dashboard",
-  "version": "0.0.1",
+  "name": "@soloud/sldashboard",
+  "version": "1.0.1",
   "peerDependencies": {
     "@angular/common": "^15.2.4",
-    "@angular/core": "^15.2.4"
+    "@angular/core": "^15.2.4",
+    "@angular/cdk": "^15.2.4",
+    "ngx-scrollbar": "^11.0.0"
+
   },
   "dependencies": {
     "tslib": "^2.3.0"
