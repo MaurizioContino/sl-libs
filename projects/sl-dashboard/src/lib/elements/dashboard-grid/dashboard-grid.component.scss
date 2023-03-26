@@ -1,0 +1,15 @@
+::ngdeep tbody {
+  height: 100vh;
+  padding:20px;
+}
+
+::ng-deep tbody tr td {
+  background-color: #EFF6FF !important;
+  padding: 0px !important;
+  text-align: center !important;
+}
+::ng-deep.p-datatable>.p-datatable-wrapper {
+  overflow: auto;
+  height: 100vh;
+}
+

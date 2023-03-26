@@ -1,0 +1,84 @@
+<div class="container" >
+
+  <div class="row">
+    <div class="col width150">
+      <label for="field">Seleziona</label>
+      <ng-select id="field" [items]="methods"
+      [(ngModel)]="MainSelect"></ng-select>
+
+    </div>
+    <div class="col width300">
+
+      <label for="field">Campo principale</label>
+      <ng-select id="field" [items]="Fields"
+      [(ngModel)]="MainField"
+      [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col width150">
+      <label for="field">Seleziona</label>
+      <ng-select id="field" [items]="methods" [(ngModel)]="SecondaryLeftSelect"></ng-select>
+
+    </div>
+    <div class="col width300">
+
+      <label for="field">Campo secondario sinistra</label>
+      <ng-select id="field" [items]="Fields" [(ngModel)]="SecondaryLeftField"
+      [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
+
+    </div>
+    <div class="col width150">
+
+      <label for="titlesx">Titolo</label>
+      <input id="titlesx" type="text" [(ngModel)]="SecondaryLeftTitle">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col width150">
+      <label for="field">Seleziona</label>
+      <ng-select id="field" [items]="methods" [(ngModel)]="SecondaryRightSelect"></ng-select>
+
+    </div>
+    <div class="col width300">
+
+      <label for="field">Campo secondario destro</label>
+      <ng-select id="field" [items]="Fields" [(ngModel)]="SecondaryRightField"
+      [bindLabel]="'Label'" [bindValue]="'Property'"></ng-select>
+
+    </div>
+    <div class="col width150">
+
+      <label for="titledx">Titolo</label>
+      <input id="titledx" type="text" [(ngModel)]="SecondaryRightTitle">
+
+    </div>
+
+  </div>
+
+<sl-accordion>
+  <sl-accordion-item *sl-accordion-element>
+    <div *sl-accordion-title>Stile elemento principale</div>
+    <div *sl-accordion-body>
+      <sl-dashboard-itemValue-style [style]="MainStyle"></sl-dashboard-itemValue-style>
+    </div>
+  </sl-accordion-item>
+  <sl-accordion-item *sl-accordion-element>
+    <div *sl-accordion-title>Stile elemento di sinistra</div>
+    <div *sl-accordion-body>
+    <sl-dashboard-itemValue-style [style]="LeftStyle"></sl-dashboard-itemValue-style>
+    </div>
+  </sl-accordion-item>
+  <sl-accordion-item *sl-accordion-element>
+    <div *sl-accordion-title>Stile elemento di destra</div>
+    <div *sl-accordion-body>
+    <sl-dashboard-itemValue-style [style]="RightStyle"></sl-dashboard-itemValue-style>
+    </div>
+  </sl-accordion-item>
+</sl-accordion>
+
+
+</div>

@@ -1,0 +1,84 @@
+sl-dashboard-placement {
+  height: 100%;
+}
+
+
+.top-buttons {
+  position: absolute;
+  top:10px;
+  right:10px
+}
+.filter-box-open {
+  height: 200px;
+  display: block;
+  animation-name: filterbox-open;
+  animation-duration: 1s;
+
+}
+.filter-box-close {
+  height: 0px;
+
+  animation-name: filterbox-close;
+  animation-duration: 1s;
+}
+
+@keyframes filterbox-close {
+  from {height: 200px;}
+  to {height: 0px;}
+}
+@keyframes filterbox-open {
+  from {height: 0px;}
+  to {height: 200px;}
+}
+.container-back {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 244, 244);
+  overflow: hidden;
+}
+
+.container {
+
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: white;
+  border-top-left-radius: 30px;
+  box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
+  -webkit-box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 39%);
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  width: 100%;
+
+}
+.col {
+  height: 50px;
+  width: 50px;
+}
+
+.h1 {
+
+  font-size: 36px;
+  padding: 20px;
+}
+
+
+.button-addcontrol {
+  color: #ffffff8a;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 0px;
+  border-radius: 10px;
+  //font-size:66px !important;
+}
+.button-addcontrol:hover {
+  animation: btn-show-in 0.6s linear forwards;
+  background-color: silver;
+}
+::ng-deep  .ng-scroll-content  {
+  padding: 5px !important;
+}

@@ -1,0 +1,29 @@
+
+<div class="item-value-container">
+<div class="item-value"
+[style.font-size.px]="mainfieldValuefontSize"
+[style.color]="ColorMain"> {{ Data }}</div>
+<div class="item-value-title"
+[style.font-size.px]="mainfieldLabelfontSize"
+[style.color]="ColorMain">{{getMainField()}}</div>
+<div class="separator"></div>
+<div class="secondary">
+  <div class="secondary-left" *ngIf="ShowLeft">
+    <div class="secondary-title"
+    [style.font-size.px]="leftfieldValuefontSize"
+    [style.color]="ColorLeft">{{getLeftField()}}</div>
+    <div class="secondary-value"
+    [style.font-size.px]="leftfieldLabelfontSize"
+    [style.color]="ColorLeft">{{DataLeft}}</div>
+  </div>
+  <div class="secondary-right" *ngIf="ShowRight">
+    <div class="secondary-title"
+    [style.font-size.px]="rightfieldValuefontSize"
+    [style.color]="ColorRight">{{getRightField()}}</div>
+    <div class="secondary-value"
+    [style.font-size.px]="rightfieldLabelfontSize"
+    [style.color]="ColorRight">{{DataRight}}</div>
+
+  </div>
+</div>
+</div>

@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "slDashboard": {
+      "projectType": "library",
+      "root": "projects/sl-dashboard",
+      "sourceRoot": "projects/sl-dashboard/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/sl-dashboard/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sl-dashboard/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/sl-dashboard/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sl-dashboard/src/test.ts",
+            "tsConfig": "projects/sl-dashboard/tsconfig.spec.json",
+            "karmaConfig": "projects/sl-dashboard/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }

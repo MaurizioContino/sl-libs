@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col150">
+    <div>Dimensione valore</div>
+    <input type="number" [(ngModel)]="style.valuefontsize" title="vfs">
+  </div>
+  <div class="col150">
+    <div>Dimensione label</div>
+    <input type="number" [(ngModel)]="style.labelfontsize"  title="lfs">
+  </div>
+
+  <!--
+  <sl-color-picker *ngFor="let color of style.colors; let idx=index"
+  [(Value)]="style.colors[idx]"
+  [Field]="'Main'" [RightFields]="['Left', 'Right']"
+  ></sl-color-picker>
+-->
+  <div class="add-color-button">
+    <button pButton pRipple type="button" icon="fa fa-plus fa-2x" label="Nuova area" title="Nuova area" class=" p-button-text" (click)="addcolor()"></button>
+
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<ng-container *ngFor="let widget of GetElemetsAsIDashboard(); let idx=index">
+
+  
+
+<div class="dsh-item" (click)="Selected.emit(widget.IdComponent)">
+  
+  <h1> {{widget.Name}}</h1>
+  <h3> {{widget.Description}}</h3>
+  <!-- <sl-dashboard-element [item]="itm" [status]="selectStatus"></sl-dashboard-element> -->
+  
+</div>
+</ng-container>

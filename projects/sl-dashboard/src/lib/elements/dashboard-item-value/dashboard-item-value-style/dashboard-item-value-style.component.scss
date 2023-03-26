@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+.col150 {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  div {
+    width: 100%;
+  }
+}
+.add-color-button {
+  padding-top: 24px;
+}

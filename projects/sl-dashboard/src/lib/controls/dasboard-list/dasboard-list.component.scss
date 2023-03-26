@@ -1,0 +1,9 @@
+.dsh-item {
+  padding: 20px;
+  border: 1px solid silver;
+}
+
+.dsh-item:hover {
+  background-color: var(--accent);
+  color: white;
+}
