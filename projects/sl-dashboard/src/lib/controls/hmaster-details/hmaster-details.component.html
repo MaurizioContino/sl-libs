@@ -1,0 +1,12 @@
+
+  <div class="hdm-left-right">
+    <div [ngClass]="{'hdm-left-small': overlapped, 'hdm-left': !overlapped }">
+
+      <ng-container *ngTemplateOutlet="master"></ng-container>
+    </div>
+    <div class="hdm-right shadow" *ngIf="SelectedDetail">
+
+      <ng-container  *ngTemplateOutlet="details; context: {$implicit:SelectedDetail}"></ng-container>
+      <i class="hdm-close-button fa-solid fa-times fa-2x" (click)="closedetails()"></i>
+  </div>
+  </div>

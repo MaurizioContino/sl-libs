@@ -1,0 +1,46 @@
+.hmd-container {
+  padding: 0px
+}
+.hdm-left-right {
+
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.hdm-left {
+  flex: 1 0 auto;
+  height: 100%;
+}
+.hdm-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  min-width: 50%;
+  background: white;
+  z-index: 500;
+  height: 100vh;
+}
+.hdm-left-small {
+  flex: 1 0 auto;
+  height: 100%;
+
+}
+
+.hdm-close-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 100%;
+  padding: 10px 15px;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+  opacity: 0.6;
+  color: black;
+  -webkit-box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+  box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+}
+.hdm-close-button:hover {
+  opacity: 1;
+}

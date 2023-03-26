@@ -12,16 +12,17 @@ import { DashboardConfigService } from '../../services/dashboard.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardElementComponent implements AfterViewInit {
-    private _Config!: WidgetConfig;
+    private _Config?: WidgetConfig | undefined;
 
     @Input()
-    public get Config(): WidgetConfig {
-        return this._Config;
+    public get Config(): WidgetConfig | undefined {
+      return this._Config;
     }
-    public set Config(value: WidgetConfig) {
-        this._Config = value;
-        this.loadComponent();
+    public set Config(value: WidgetConfig | undefined) {
+      this._Config = value;
+      this.loadComponent();
     }
+
     @Input() EditMode = 'none';
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
@@ -57,13 +58,13 @@ export class DashboardElementComponent implements AfterViewInit {
             viewContainerRef.clear();
 
             const model = this.dashserv.Widgets.find((v) => v.IdComponent===this.Config?.IdComponent);
-            if (model) {
+            if (model && this.Config) {
                 const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.Configcomponent);
                 componentRef.instance.Config = this.Config;
                 componentRef.instance.DataSource = this.Config.DataSource;
                 if (this.Config.CustomData) {
                     Object.keys(this.Config.CustomData).forEach((prop) => {
-                        (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
+                        (componentRef.instance as any)[prop] = this.Config!.CustomData[prop];
                     });
                 }
                 this.cdr.detectChanges();

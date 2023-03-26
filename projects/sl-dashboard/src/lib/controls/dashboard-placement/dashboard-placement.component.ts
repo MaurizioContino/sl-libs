@@ -1,5 +1,4 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
-import { SlLayoutsService } from '@soloud/sllayout';
 
 import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
 
@@ -8,6 +7,7 @@ import { DashboardSize } from '../../models/DashboardSize';
 import { DashboardWidget } from '../../models/DashboardWidget';
 import { WidgetConfig } from '../../models/WidgetConfig';
 import { DashboardConfigService } from '../../services/dashboard.service';
+import { SlLayoutsService } from '../../services/sl-layouts.service';
 
 @Component({
     selector: 'sl-dashboard-placement',
