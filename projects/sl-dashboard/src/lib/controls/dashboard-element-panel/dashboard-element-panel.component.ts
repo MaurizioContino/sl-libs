@@ -65,7 +65,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
       this.InternalDataSource.complete();
 
     }
-
+    componentRef: any = null;
     loadComponent() {
       if (this.WidgetHost && this.WidgetHost.viewContainerRef.length==0) {
         const viewContainerRef = this.WidgetHost.viewContainerRef;
@@ -73,26 +73,26 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
         if (this.Config) {
           const model = this.dashserv.Widgets.find((v) => v.IdComponent===this.Config?.IdComponent);
           if (model) {
-            const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
+            this.componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
-              componentRef.instance.Config = this.Config;
+              this.componentRef.instance.Config = this.Config;
 
-              if (componentRef.instance.ItemClick) {
+              if (this.componentRef.instance.ItemClick) {
 
-                componentRef.instance.ItemClick.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+                this.componentRef.instance.ItemClick.pipe(takeUntil(this.destroy$)).subscribe((v: any)=>{
                   this.ItemClick.emit({source:this.Config, value: v});
                 })
               }
               if (this.Config.CustomData) {
                 Object.keys(this.Config.CustomData).forEach(prop => {
-                  (componentRef.instance as any)[prop] = this.Config.CustomData[prop];
+                  (this.componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
               if (this.Config.DataSource) {
                 this.Config.DataSource.pipe(takeUntil(this.destroy$)).subscribe(v=>{
                   this.InternalDataSource.next(v);
                 });
-                componentRef.instance.DataSource = this.InternalDataSource;
+                this.componentRef.instance.DataSource = this.InternalDataSource;
               }
 
 
@@ -132,7 +132,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
       this.Config.width += deltax;
       this.DragDeltaWidth = 0;
       this.DragDeltaHeight = 0;
-
+      this.componentRef.instance.Config = this.Config;
 
     }
    }

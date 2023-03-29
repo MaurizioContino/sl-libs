@@ -18,7 +18,7 @@ import { SlLayoutsService } from '../../services/sl-layouts.service';
 export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDestroy {
   private _contents: QueryList<TemplateRef<any>> | undefined;
 
-  editMode = false;
+  @Input() editMode = false;
   @Input() dashboard!: Dashboard;
   @Input() Editable = true;
   @Output() ItemClicked =new EventEmitter<any>();
@@ -57,6 +57,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         layout.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
           this.ngAfterViewInit();
         });
+
       }
 
 

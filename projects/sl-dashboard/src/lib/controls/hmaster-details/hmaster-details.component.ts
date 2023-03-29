@@ -11,7 +11,7 @@ import { SlLayoutsService } from '../../services/sl-layouts.service';
 @Component({
   selector: 'sl-hmaster-details',
   templateUrl: './hmaster-details.component.html',
-  styleUrls: ['./hmaster-details.component.css'],
+  styleUrls: ['./hmaster-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HMasterDetailsComponent implements OnInit, OnDestroy {

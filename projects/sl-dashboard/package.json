@@ -1,6 +1,12 @@
 {
   "name": "@soloud/sldashboard",
-  "version": "1.0.1",
+  "version": "1.0.15",
+  "ngPackage": {
+    "lib": {
+      "cssUrl": "inline",
+      "entryFile": "public_api.ts"
+    }
+  },
   "peerDependencies": {
     "@angular/common": "^15.2.4",
     "@angular/core": "^15.2.4",

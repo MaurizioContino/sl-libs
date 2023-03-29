@@ -14,6 +14,9 @@ export class Dashboard  {
     Items: WidgetConfig[] = [];
 
 
+    constructor(name: string) {
+        this.Name = name;
+    }
 
     getWidgetByPosition(r: number, c: number): WidgetConfig | null {
         const itm = this.Items.find((w) => w.Top===r && w.Left===c);

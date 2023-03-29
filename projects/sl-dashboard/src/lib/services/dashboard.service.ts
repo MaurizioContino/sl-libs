@@ -1,12 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Dashboard } from '../models/Dashboard';
 import { DashboardWidget } from '../models/DashboardWidget';
+
+
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DashboardConfigService {
 
   store = "Dashboards";
@@ -16,57 +20,76 @@ export class DashboardConfigService {
   Widgets: DashboardWidget[] = [];
 
 
-  calculateColor(colorfuncs: string[], value: number, rightvalues: any): string {
-    let ret = "black";
-    colorfuncs.forEach(cf => {
-      const slices = cf.split(':')
-      if (slices[0]=='direct' || slices[0]=='formula') {
-        if (slices[0]=='direct') {
-          ret = slices[1];
-        } else {
-          if (this.colorFormula(value, slices[2], slices[3], rightvalues))
-          {
-            ret = slices[1]
-          }
+  //DataSources: DashboardDataSource[] = [];
+  confServ : any = {}
 
-        }
-      } else {
-        ret = slices[0]
-      }
+  constructor(  private http: HttpClient) {}
+
+
+
+  GetListDashBoard(): Observable<any[]> {
+
+
+
+    const ret = new Subject<any>();
+    this.http.get<any[]>(this.confServ.DashServiceUrl + `/Dashboards`).subscribe((v: any[])=>{
+        ret.next( v);
     });
     return ret;
   }
 
-  colorFormula(value: number, comparer: string, rightvalue: string, rightvalues: any): boolean {
-    switch(comparer) {
-      case "=": {
-        if (value===rightvalues[rightvalue]) return true;
-        break;
-      }
-      case ">": {
-        if (value > rightvalues[rightvalue]) return true;
-        break;
-      }
-      case "<": {
-        if (value < rightvalues[rightvalue]) return true;
-        break;
-      }
-      case ">=": {
-        if (value >= rightvalues[rightvalue]) return true;
-        break;
-      }
-      case "<=": {
-        if (value <= rightvalues[rightvalue]) return true;
-        break;
-      }
-      case "<>": {
-        if (value != rightvalues[rightvalue]) return true;
-        break;
-      }
-      default:
-        return false;
-    }
-    return false
+  SearchDashBoards(name: string): Observable<any[]> {
+    const ret = new Subject<any>();
+    this.http.get<any[]>(this.confServ.DashServiceUrl + `/Dashboards/search/` + name).subscribe((v: any[])=>{
+        ret.next( v);
+    });
+    return ret;
   }
+
+  RenameDashBoard(id: string, name: string): Observable<any[]> {
+    const ret = new Subject<any>();
+    this.http.get<any>(this.confServ.DashServiceUrl + `/Dashboards/rename/` + id + "/" + name).subscribe((v: any[])=>{
+        ret.next(v);
+    });
+    return ret;
+  }
+  CreateDashBoard(id: string, name: string): Observable<any[]> {
+    const ret = new Subject<any>();
+    this.http.get<any>(this.confServ.DashServiceUrl + `/Dashboards/create/` + name).subscribe((v: any[])=>{
+        ret.next(v);
+    });
+    return ret;
+  }
+  ReorderDashBoard(dashboards: any): Observable<any[]> {
+    const ret = new Subject<any>();
+    this.http.post<any>(this.confServ.DashServiceUrl + '/Dashboards/reorder', dashboards).subscribe((v: any[])=>{
+        ret.next(v);
+    });
+    return ret;
+  }
+
+
+  GetDashBoard(name: string): Observable<any> {
+    const ret = new Subject<any>();
+    this.http.get<any>(this.confServ.DashServiceUrl + `/Dashboards/` + name).subscribe((v: any[])=>{
+        ret.next( v);
+    });
+    return ret;
+  }
+
+
+  SaveListDashBaord(item: any): Observable<any> {
+
+    const ret = new Subject<any>();
+
+    this.http.post<string>(this.confServ.DashServiceUrl + `/Dashboards`, item).subscribe((v: string)=>{
+        ret.next(v);
+
+    });
+    return ret;
+  }
+
+
+
 
 }

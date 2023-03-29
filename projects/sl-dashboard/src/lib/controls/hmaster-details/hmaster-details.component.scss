@@ -14,12 +14,13 @@
 }
 .hdm-right {
   position: absolute;
-  top: 0px;
   right: 0px;
-  min-width: 50%;
+  min-width: 600px;
   background: white;
-  z-index: 500;
-  height: 100vh;
+  z-index: 1000;
+  height: 100%;
+  box-shadow: -3px 0px 6px -2px rgb(0 0 0 / 39%);
+  border-top-left-radius: 20px;
 }
 .hdm-left-small {
   flex: 1 0 auto;
