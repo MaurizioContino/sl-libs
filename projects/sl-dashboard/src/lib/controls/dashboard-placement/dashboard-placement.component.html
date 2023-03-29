@@ -1,60 +1,43 @@
 <sl-hmaster-details [SelectedDetail]="DisplayDetails" (DetailClosed)="closeDetails()">
   <ng-template #hmdmaster>
-    <div class="top-buttons" *ngIf="Editable">
 
-      <button pButton pRipple type="button" icon="fa fa-pencil" class="p-button-rounded p-button-secondary" title="edit" *ngIf="Editable && !editMode"
-      (click)="editMode=true"></button>
-      <button pButton pRipple type="button" icon="fa fa-save" class="p-button-rounded p-button-danger" title="save" *ngIf="editMode"
-      (click)="editMode=true"></button>
-      <button pButton pRipple type="button" icon="fa fa-times" class="p-button-rounded p-button-secondary"  title="cancel" *ngIf="editMode"
-      (click)="editMode=false"></button>
-
-
-    </div>
     <div *ngIf="dashboard" class="container-back">
+      <div class="container">
+        <ng-scrollbar style="height: 100%">
+          <div *ngFor="let idr of rows" class="row">
+            <div *ngFor="let idc of cols" class="col">
+              <ng-container *ngIf="WidgetIn(idr,idc)===null; else widget">
+                <button title="add control" class="button-addcontrol" *ngIf="editMode" (click)="showadd(idr, idc)">
+                  <i class="fa-solid fa-plus fa-2x"></i>
+                </button>
+              </ng-container>
+              <ng-template #widget>
+                <sl-dashboard-element-panel [id]="'Cell_' + idr + '-' + idc" [Config]="ConfigIn(idr, idc)!"
+                  [EditMode]="editMode" (Copy)="copyElement($event)" (Delete)="deleteElement($event)"
+                  (Setup)="setupElement($event)"
+                  (ItemClick)="emitClick($event, ConfigIn(idr, idc))"></sl-dashboard-element-panel>
+              </ng-template>
 
-    <div class="container">
-      <ng-scrollbar style="height: 100%">
-        <div *ngFor="let idr of rows" class="row">
-          <div *ngFor="let idc of cols" class="col">
-            <ng-container *ngIf="WidgetIn(idr,idc)===null; else widget">
-
-              <button title="add control" class="button-addcontrol" *ngIf="editMode" (click)="showadd(idr, idc)">
-                <i class="fa-solid fa-plus fa-2x"></i>
-              </button>
-            </ng-container>
-
-            <ng-template #widget>
-              <sl-dashboard-element-panel [id]="'Cell_' + idr + '-' + idc"
-              [Config]="ConfigIn(idr, idc)!" [EditMode]="editMode"
-                (Copy)="copyElement($event)" (Delete)="deleteElement($event)" (Setup)="setupElement($event)"
-                (ItemClick)="emitClick($event, ConfigIn(idr, idc))"
-              ></sl-dashboard-element-panel>
-            </ng-template>
-
+            </div>
           </div>
-        </div>
-      </ng-scrollbar>
-    </div>
+        </ng-scrollbar>
+      </div>
     </div>
   </ng-template>
-
   <ng-template #hmddetails let-values>
+    <sl-smallheader
+
+      [Title]="showSelect ? 'Selezionare il widget' : 'Configurazione widget'" [EditStatus]="'edit'" [canSave]="true"
+      (Save)="SaveConfig()" (Cancel)="CancelConfig()">
+      <ng-template #smallheadcontent>
         <ng-container *ngIf="showSelect">
-
-          <sl-dashboard-item-list (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
+          <sl-dashboard-item-list
+            (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
         </ng-container>
-
         <ng-container *ngIf="showConfig">
-          <ng-container>
-            <button pButton pRipple type="button" icon="fa-solid fa-save" label="Save" title="Save" class=" p-button-text"  (click)="SaveConfigLocal()"></button>
-            <div class="header-spacer"></div>
-            <button pButton pRipple type="button" icon="fa-solid fa-undo" label="Cancel" title="Cancel" class=" p-button-text"  (click)="CancelConfig()"></button>
-          </ng-container>
-
-          <sl-dashboard-element *ngIf="SelectedConfig"
-          [Config]="SelectedConfig" ></sl-dashboard-element>
+          <sl-dashboard-element *ngIf="SelectedConfig" [Config]="SelectedConfig"></sl-dashboard-element>
         </ng-container>
+      </ng-template>
+    </sl-smallheader>
   </ng-template>
-
 </sl-hmaster-details>
