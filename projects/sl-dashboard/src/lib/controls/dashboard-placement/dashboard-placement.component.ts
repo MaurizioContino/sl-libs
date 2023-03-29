@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
 
 import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
@@ -22,6 +23,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   @Input() dashboard!: Dashboard;
   @Input() Editable = true;
   @Output() ItemClicked =new EventEmitter<any>();
+  @Output() SaveConfig =new EventEmitter<any>();
+
 
   @Output() DashboardSizeChanged = new EventEmitter<DashboardSize>()
 
@@ -40,7 +43,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
 
     get SelectedConfig(): WidgetConfig | undefined {
-      const item = this.WidgetIn(this.selectr,this.selectc)?.Config;
+      const item = JSON.parse(JSON.stringify( this.WidgetIn(this.selectr,this.selectc)?.Config));
       return item;
     }
 
@@ -58,8 +61,6 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
           this.ngAfterViewInit();
         });
       }
-
-
       ngOnInit(): void {
         console.log("begin dashboard")
       }
@@ -117,12 +118,18 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
           this.cdr.detectChanges();
       }
     }
-    SaveConfig(){
-      if (this.SelectedConfig && this.SelectedConfig.widget)
+    SaveConfigLocal(){
+      if (this.SelectedConfig && this.SelectedConfig.widget && this.WidgetIn(this.selectr,this.selectc)) {
+        this.WidgetIn(this.selectr,this.selectc)!.Config = this.SelectedConfig;
         this.SelectedConfig.widget.Calculate()
+        this.SaveConfig.emit(this.SelectedConfig);
+      }
+
     }
     CancelConfig(){
-      //todo
+      this.showConfig = false
+      this.showSelect = false;
+
     }
 
     WidgetIn(r: number | null, c: number | null): DashboardWidget | null {

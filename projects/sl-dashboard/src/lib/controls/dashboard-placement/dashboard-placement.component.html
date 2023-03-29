@@ -40,32 +40,21 @@
   </ng-template>
 
   <ng-template #hmddetails let-values>
-
-    <sl-smallheader [Avatar]="'assets/media/avatars/Dashboard.png'"
-      [Background]="'assets/media/backgrounds/Dashboard.png'"
-      [Title]="showSelect ? 'Selezionare il widget' : 'Configurazione widget'" [EditStatus]="'edit'" [canSave]="true"
-      (Save)="SaveConfig()" (Cancel)="CancelConfig()">
-      <ng-template #smallheadcontent>
-
         <ng-container *ngIf="showSelect">
 
           <sl-dashboard-item-list (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
         </ng-container>
 
         <ng-container *ngIf="showConfig">
+          <ng-container>
+            <button pButton pRipple type="button" icon="fa-solid fa-save" label="Save" title="Save" class=" p-button-text"  (click)="SaveConfigLocal()"></button>
+            <div class="header-spacer"></div>
+            <button pButton pRipple type="button" icon="fa-solid fa-undo" label="Cancel" title="Cancel" class=" p-button-text"  (click)="CancelConfig()"></button>
+          </ng-container>
+
           <sl-dashboard-element *ngIf="SelectedConfig"
           [Config]="SelectedConfig" ></sl-dashboard-element>
         </ng-container>
-
-
-
-      </ng-template>
-    </sl-smallheader>
-
-
-
-
-
   </ng-template>
 
 </sl-hmaster-details>
