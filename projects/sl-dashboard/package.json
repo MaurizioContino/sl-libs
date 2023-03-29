@@ -1,6 +1,6 @@
 {
   "name": "@soloud/sldashboard",
-  "version": "1.0.15",
+  "version": "1.0.24",
   "ngPackage": {
     "lib": {
       "cssUrl": "inline",

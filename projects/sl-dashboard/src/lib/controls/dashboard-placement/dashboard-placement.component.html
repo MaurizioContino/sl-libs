@@ -25,19 +25,21 @@
     </div>
   </ng-template>
   <ng-template #hmddetails let-values>
-    <sl-smallheader
-
-      [Title]="showSelect ? 'Selezionare il widget' : 'Configurazione widget'" [EditStatus]="'edit'" [canSave]="true"
-      (Save)="SaveConfig()" (Cancel)="CancelConfig()">
-      <ng-template #smallheadcontent>
-        <ng-container *ngIf="showSelect">
+    <div class="detail-container" *ngIf="showSelect">
+      <div class="h1">Selezione widget</div>
           <sl-dashboard-item-list
             (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
-        </ng-container>
-        <ng-container *ngIf="showConfig">
+    </div>
+        <div class="detail-container" *ngIf="showConfig">
+          <div class="h1">Configurazione widget</div>
+
+          <div class="row">
+          <button type="button" (click)="SaveConfigLocal()">Save</button>
+            <div class="header-spacer"></div>
+            <button type="button" (click)="CancelConfig()">Cancel</button>
+          </div>
           <sl-dashboard-element *ngIf="SelectedConfig" [Config]="SelectedConfig"></sl-dashboard-element>
-        </ng-container>
+        </div>
       </ng-template>
-    </sl-smallheader>
-  </ng-template>
+
 </sl-hmaster-details>

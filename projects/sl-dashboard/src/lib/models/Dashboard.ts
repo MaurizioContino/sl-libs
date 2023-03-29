@@ -23,6 +23,14 @@ export class Dashboard  {
         if (itm) return itm;
         else return null;
     }
+    setWidgetByPosition(r: number, c: number, w: WidgetConfig) {
+      const itm = this.Items.find((w) => w.Top===r && w.Left===c);
+      if (itm) {
+        const idx = this.Items.indexOf(itm);
+        this.Items[idx] = w;
+      }
+  }
+
 
     public fromJson(data: string) {
         const deserialized = JSON.parse(data) as Dashboard;

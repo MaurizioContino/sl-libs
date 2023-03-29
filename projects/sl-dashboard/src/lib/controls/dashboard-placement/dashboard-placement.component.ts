@@ -43,7 +43,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
 
     get SelectedConfig(): WidgetConfig | undefined {
-      const item = JSON.parse(JSON.stringify( this.WidgetIn(this.selectr,this.selectc)?.Config));
+      const item = this.WidgetIn(this.selectr,this.selectc)?.Config;
       return item;
     }
 
@@ -120,17 +120,15 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       }
     }
     SaveConfigLocal(){
-      if (this.SelectedConfig && this.SelectedConfig.widget && this.WidgetIn(this.selectr,this.selectc)) {
-        this.WidgetIn(this.selectr,this.selectc)!.Config = this.SelectedConfig;
-        this.SelectedConfig.widget.Calculate()
+
+      if (this.SelectedConfig)  {
+        this.dashboard.setWidgetByPosition(this.selectr!,this.selectc!,this.SelectedConfig);
         this.SaveConfig.emit(this.SelectedConfig);
       }
-
     }
     CancelConfig(){
       this.showConfig = false
       this.showSelect = false;
-
     }
 
     WidgetIn(r: number | null, c: number | null): DashboardWidget | null {

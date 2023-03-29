@@ -14,14 +14,8 @@ import { DashboardConfigService } from '../../services/dashboard.service';
 export class DashboardElementComponent implements AfterViewInit {
     private _Config?: WidgetConfig | undefined;
 
-    @Input()
-    public get Config(): WidgetConfig | undefined {
-      return this._Config;
-    }
-    public set Config(value: WidgetConfig | undefined) {
-      this._Config = value;
-      this.loadComponent();
-    }
+    @Input() Config!: WidgetConfig;
+
 
     @Input() EditMode = 'none';
 
