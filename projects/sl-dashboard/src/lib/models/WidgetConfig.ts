@@ -3,7 +3,7 @@ import { WidgetElement } from "./widgetElement";
 
 export interface WidgetConfig {
 
-    IdItem: number;
+    IdItem: string;
     IdComponent: number;
     Top: number;
     Left: number;
@@ -11,7 +11,6 @@ export interface WidgetConfig {
     height: number;
     Title: string;
     CustomData: any;
-    DataSource?: BehaviorSubject<any>;
     BackgroundColor: string;
     widget?: WidgetElement;
 

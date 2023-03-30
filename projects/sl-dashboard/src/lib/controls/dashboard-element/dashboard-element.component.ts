@@ -55,7 +55,7 @@ export class DashboardElementComponent implements AfterViewInit {
             if (model && this.Config) {
                 const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.Configcomponent);
                 componentRef.instance.Config = this.Config;
-                componentRef.instance.DataSource = this.Config.DataSource;
+                
                 if (this.Config.CustomData) {
                     Object.keys(this.Config.CustomData).forEach((prop) => {
                         (componentRef.instance as any)[prop] = this.Config!.CustomData[prop];

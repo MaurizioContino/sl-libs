@@ -24,10 +24,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   @Input() Editable = true;
   @Output() ItemClicked =new EventEmitter<any>();
   @Output() SaveConfig =new EventEmitter<any>();
-
-
   @Output() DashboardSizeChanged = new EventEmitter<DashboardSize>()
-
 
   @ContentChildren('dashboarditem')
     public get contents(): QueryList<TemplateRef<any>> | undefined {
@@ -45,6 +42,10 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
     get SelectedConfig(): WidgetConfig | undefined {
       const item = this.WidgetIn(this.selectr,this.selectc)?.Config;
       return item;
+    }
+
+    get now(): string {
+      return Date.now().toString();
     }
 
     DisplayDetails: true | null = null;
@@ -108,21 +109,23 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
           this.showSelect = false;
           this.showConfig = true;
           const conf = model.cloneConfig();
+          conf.IdItem = Date.now().toString();
           conf.Top = this.selectr;
           conf.Left = this.selectc;
-          if (width) conf.width = width;
+          if (width) conf.width = width;  
           if (height) conf.height = height;
           if (customdata!=null) conf.CustomData = customdata;
-          if (datasource!=null) conf.DataSource = datasource;
+          
 
           this.dashboard.Items.push(conf);
-          this.cdr.detectChanges();
+         //this.cdr.detectChanges();
       }
     }
     SaveConfigLocal(){
 
-      if (this.SelectedConfig)  {
-        this.dashboard.setWidgetByPosition(this.selectr!,this.selectc!,this.SelectedConfig);
+      if (this.SelectedConfig)  { 
+        this.dashboard.UpdateWidget(this.SelectedConfig);
+        this.dashserv.ConfigChange(this.SelectedConfig);
         this.SaveConfig.emit(this.SelectedConfig);
       }
     }
@@ -137,7 +140,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         const model = this.dashserv.Widgets.find(v=>v.IdComponent==config?.IdComponent);
         if (model && config) {
           const w = model.clone(config)
-          w.Config = config;
+          //w.Config = config;
           return w;
         } else {
           return null

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Dashboard } from '../models/Dashboard';
 import { DashboardWidget } from '../models/DashboardWidget';
+import { WidgetConfig } from '../models/WidgetConfig';
 
 
 
@@ -17,6 +18,7 @@ export class DashboardConfigService {
   DashboardGrids: Dashboard[] | null = null;
   DashboardGrids$: Subject<Dashboard[]> = new Subject<Dashboard[]>();
   Size$= new BehaviorSubject<any>(null);
+  ConfigChanges$= new Subject<WidgetConfig>();
   Widgets: DashboardWidget[] = [];
 
 
@@ -25,11 +27,11 @@ export class DashboardConfigService {
 
   constructor(  private http: HttpClient) {}
 
-
+  ConfigChange(config: WidgetConfig) {
+    this.ConfigChanges$.next(config);
+  }
 
   GetListDashBoard(): Observable<any[]> {
-
-
 
     const ret = new Subject<any>();
     this.http.get<any[]>(this.confServ.DashServiceUrl + `/Dashboards`).subscribe((v: any[])=>{
@@ -77,11 +79,9 @@ export class DashboardConfigService {
     return ret;
   }
 
-
   SaveListDashBaord(item: any): Observable<any> {
 
     const ret = new Subject<any>();
-
     this.http.post<string>(this.confServ.DashServiceUrl + `/Dashboards`, item).subscribe((v: string)=>{
         ret.next(v);
 

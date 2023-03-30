@@ -2,19 +2,19 @@
 <div class="card" #card [style.width.px]="width" [style.height.px]="height" [style.background]="Config.BackgroundColor">
   <div class="card-header" *ngIf="EditMode">
     <div class="card-header-row">
-      <button title="drag" class="button button-primary"  cdkDrag (cdkDragMoved)="cdkMoveDragMoved($event)" (cdkDragEnded)="cdkMoveDragEnded($event)">
-        <i class="fa-solid fa-arrows-alt fa-lg ico-margins"></i>
-      </button>
+      
+        <i class="fa-solid fa-arrows-alt fa-lg ico-margins" cdkDrag (cdkDragMoved)="cdkMoveDragMoved($event)" (cdkDragEnded)="cdkMoveDragEnded($event)"></i>
+      
       <span class="spacer"></span>
-      <button title="Setup Control" class="button button-primary" (click)="copy()">
-        <i class="fa-solid fa-copy fa-lg ico-margins primary"></i>
-      </button>
-      <button title="Setup Control" class="button button-primary" (click)="setup()">
-        <i class="fa-solid fa-pencil fa-lg ico-margins primary"></i>
-      </button>
-      <button title="Remove Control" class="button button-danger" (click)="remove()">
-        <i class="fa-solid fa-trash fa-lg ico-margins danger"></i>
-      </button>
+      
+        <i class="fa-solid fa-copy fa-lg ico-margins primary"  (click)="copy()"></i>
+      
+      
+        <i class="fa-solid fa-pencil fa-lg ico-margins primary" (click)="setup()"></i>
+      
+      
+        <i class="fa-solid fa-trash fa-lg ico-margins danger"  (click)="remove()"></i>
+      
     </div>
 
   </div>

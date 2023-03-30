@@ -10,5 +10,8 @@
   ],
   "include": [
     "src/**/*.d.ts"
+  ],
+  "slDashboard": [
+    "projects/sl-dashboard/src/public_api"
   ]
 }

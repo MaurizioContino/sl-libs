@@ -17,7 +17,9 @@ import { DashboardConfigService } from '../../services/dashboard.service';
 export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy {
 
 
-    @Input() Config!: WidgetConfig;
+    @Input()
+    Config!: WidgetConfig;
+ 
     @Input() EditMode = false
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
@@ -29,8 +31,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     @Output() ItemClick = new EventEmitter<any>()
 
     destroy$ = new Subject<any>();
-    InternalDataSource = new BehaviorSubject<any>(null);
-
+    
     DragDeltaWidth = 0;
     DragDeltaHeight = 0;
 
@@ -62,7 +63,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     ngOnDestroy(): void {
       this.destroy$.next(null);
       this.destroy$.complete();
-      this.InternalDataSource.complete();
+      
 
     }
     componentRef: any = null;
@@ -88,14 +89,6 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
                   (this.componentRef.instance as any)[prop] = this.Config.CustomData[prop];
                 });
               }
-              if (this.Config.DataSource) {
-                this.Config.DataSource.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-                  this.InternalDataSource.next(v);
-                });
-                this.componentRef.instance.DataSource = this.InternalDataSource;
-              }
-
-
             }
 
             this.cdr.detectChanges()
