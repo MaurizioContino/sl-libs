@@ -15,6 +15,7 @@ import { SlSmallHeaderComponent } from './controls/sl-small-header/sl-small-head
 
 
 
+
 @NgModule({
   declarations: [
     HMasterDetailsComponent,
@@ -25,6 +26,7 @@ import { SlSmallHeaderComponent } from './controls/sl-small-header/sl-small-head
     DasboardListComponent,
     DasboardItemDirective,
     NoConfigComponent,
+
   ],
   imports: [
     CommonModule, FormsModule, DragDropModule, NgScrollbarModule,
@@ -36,6 +38,7 @@ import { SlSmallHeaderComponent } from './controls/sl-small-header/sl-small-head
     DasboardListComponent,
     DasboardItemDirective,
     NoConfigComponent,
+
   ]
 })
 export class SlDashboardModule { }

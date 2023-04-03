@@ -15,6 +15,7 @@ export * from './lib/directives/dasboard-item.directive';
 export * from './lib/elements/no-config/no-config.component';
 export * from './lib/controls/hmaster-details/hmaster-details.component';
 export * from './lib/controls/sl-small-header/sl-small-header.component';
+export * from './lib/controls/dashboard-widget/dashboard-widget.component';
 export * from './lib/models/Dashboard';
 export * from './lib/models/DashboardSize';
 export * from './lib/models/DashboardWidget';
