@@ -19,7 +19,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
 
     @Input()
     Config!: WidgetConfig;
- 
+
     @Input() EditMode = false
 
     @ViewChild(DasboardItemDirective, { static: true }) WidgetHost!: DasboardItemDirective;
@@ -31,7 +31,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     @Output() ItemClick = new EventEmitter<any>()
 
     destroy$ = new Subject<any>();
-    
+
     DragDeltaWidth = 0;
     DragDeltaHeight = 0;
 
@@ -63,7 +63,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     ngOnDestroy(): void {
       this.destroy$.next(null);
       this.destroy$.complete();
-      
+
 
     }
     componentRef: any = null;

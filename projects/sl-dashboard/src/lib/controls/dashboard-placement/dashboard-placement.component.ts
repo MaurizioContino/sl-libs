@@ -25,6 +25,8 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   @Output() ItemClicked =new EventEmitter<any>();
   @Output() SaveConfig =new EventEmitter<any>();
   @Output() DashboardSizeChanged = new EventEmitter<DashboardSize>()
+  SavedetailsClass="";
+  CanceldetailsClass="";
 
   @ContentChildren('dashboarditem')
     public get contents(): QueryList<TemplateRef<any>> | undefined {
@@ -58,9 +60,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       private cdr: ChangeDetectorRef,private layout: SlLayoutsService,
       private dashserv: DashboardConfigService) {
 
-        layout.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-          this.ngAfterViewInit();
-        });
+
 
       }
       ngOnInit(): void {
@@ -83,6 +83,9 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
             this.cols.push(i);
         }
         this.DashboardSizeChanged.emit({ElementHeight: 50, ElementWidth: 50, MaxHElement: maxwidth, MaxVElement: maxHeight} as DashboardSize)
+        // this.layout.currentScreenSize$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+        //   this.ngAfterViewInit();
+        // });
     }
     showadd(idr: number, idc: number) {
         this.DisplayDetails = true;
@@ -107,15 +110,15 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
       if (this.dashboard && model && model.component && this.selectr!==null && this.selectc!==null) {
           this.showSelect = false;
-          this.showConfig = true;
+          //this.showConfig = true;
           const conf = model.cloneConfig();
           conf.IdItem = Date.now().toString();
           conf.Top = this.selectr;
           conf.Left = this.selectc;
-          if (width) conf.width = width;  
+          if (width) conf.width = width;
           if (height) conf.height = height;
           if (customdata!=null) conf.CustomData = customdata;
-          
+
 
           this.dashboard.Items.push(conf);
          //this.cdr.detectChanges();
@@ -123,7 +126,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
     }
     SaveConfigLocal(){
 
-      if (this.SelectedConfig)  { 
+      if (this.SelectedConfig)  {
         this.dashboard.UpdateWidget(this.SelectedConfig);
         this.dashserv.ConfigChange(this.SelectedConfig);
         this.SaveConfig.emit(this.SelectedConfig);
@@ -185,7 +188,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = e.Top;
         this.selectc = e.Left;
         this.showConfig = true;
-        this.DisplayDetails = true;
+        //this.DisplayDetails = true;
       }
       this.cdr.detectChanges();
     }

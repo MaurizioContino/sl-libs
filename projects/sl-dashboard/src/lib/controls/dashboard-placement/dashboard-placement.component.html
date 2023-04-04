@@ -12,7 +12,7 @@
                 </button>
               </ng-container>
               <ng-template #widget>
-                
+
                 <sl-dashboard-element-panel [id]="'Cell_' + idr + '-' + idc" [Config]="ConfigIn(idr, idc)!"
                   [EditMode]="editMode" (Copy)="copyElement($event)" (Delete)="deleteElement($event)"
                   (Setup)="setupElement($event)"
@@ -28,19 +28,30 @@
   <ng-template #hmddetails let-values>
     <div class="detail-container" *ngIf="showSelect">
       <div class="h1">Selezione widget</div>
-          <sl-dashboard-item-list
-            (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
+      <sl-dashboard-item-list (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
     </div>
-        <div class="detail-container" *ngIf="showConfig">
-          <div class="h1">Configurazione widget</div>
 
-          <div class="row">
-          <button type="button" (click)="SaveConfigLocal()">Save</button>
-            <div class="header-spacer"></div>
-            <button type="button" (click)="CancelConfig()">Cancel</button>
-          </div>
-          <sl-dashboard-element *ngIf="SelectedConfig" [Config]="SelectedConfig"></sl-dashboard-element>
-        </div>
-      </ng-template>
+  </ng-template>
 
 </sl-hmaster-details>
+<div class="overlay" *ngIf="showConfig">
+  <div class="detail-container">
+    <div class="config-left">
+      <div class="h1">Configurazione widget</div>
+      <div class="details-buttons">
+        <button type="button" (click)="SaveConfigLocal()" class="{{SavedetailsClass}}">Save</button>
+        <div class="header-spacer"></div>
+        <button type="button" (click)="CancelConfig()" class="{{CanceldetailsClass}}">Cancel</button>
+      </div>
+      <div config-container>
+        <sl-dashboard-element *ngIf="SelectedConfig" [Config]="SelectedConfig"></sl-dashboard-element>
+      </div>
+    </div>
+    <div class="config-preview" >
+
+      <sl-dashboard-element-panel [Config]="SelectedConfig!" [EditMode]="false"></sl-dashboard-element-panel>
+
+    </div>
+  </div>
+
+</div>
