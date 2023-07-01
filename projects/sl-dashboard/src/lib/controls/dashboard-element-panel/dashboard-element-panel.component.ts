@@ -40,7 +40,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     get width(): number {
       if (this.Config) {
         const w = this.Config.width > 0 ? this.Config.width : 1;
-        return (w * 50) + this.DragDeltaWidth - 20; //20 padding
+        return (w * this.Config.dy) + this.DragDeltaWidth - 20; //20 padding
       } else {
         return 100;
       }
@@ -48,7 +48,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
     get height(): number {
       if (this.Config) {
         const h = this.Config.height > 0 ? this.Config.height : 1;
-        return (h * 50) + this.DragDeltaHeight - 20; //20 padding
+        return (h * this.Config.dy) + this.DragDeltaHeight - 20; //20 padding
       } else {
         return 100;
       }
@@ -77,6 +77,8 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
           if (model) {
             this.componentRef = viewContainerRef.createComponent<DashboardWidget>(model.component);
             if (this.Config){
+              this.Config.dx = 50;
+              this.Config.dy = 50;
               this.componentRef.instance.Config = this.Config;
 
               if (this.componentRef.instance.ItemClick) {
@@ -120,8 +122,8 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
    }
    cdkResizeDragEnded(e: CdkDragEnd){
     if (this.Config){
-      const deltax = Math.round(e.distance.x / 50);
-      const deltay = Math.round(e.distance.y / 50);
+      const deltax = Math.round(e.distance.x / this.Config.dx);
+      const deltay = Math.round(e.distance.y / this.Config.dx);
       this.Config.height += deltay;
       this.Config.width += deltax;
       this.DragDeltaWidth = 0;
@@ -138,11 +140,11 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
    }
    cdkMoveDragEnded(e: CdkDragEnd){
     if (this.Config){
-      const deltax = Math.round(e.distance.x / 50);
-      const deltay = Math.round(e.distance.y / 50);
-
+      const deltax = Math.round(e.distance.x / this.Config.dx);
+      const deltay = Math.round(e.distance.y / this.Config.dy);
       this.Config.Top += deltay;
       this.Config.Left += deltax;
+
       this.card.nativeElement.style.transform = "translate3d(0px,0px," + "0px)"
       this.ConfigChanged.next(this.Config);
     }

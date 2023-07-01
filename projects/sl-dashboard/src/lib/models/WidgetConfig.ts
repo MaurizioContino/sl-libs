@@ -13,5 +13,6 @@ export interface WidgetConfig {
     CustomData: any;
     BackgroundColor: string;
     widget?: WidgetElement;
-
+    dx: number;
+    dy: number;
 }

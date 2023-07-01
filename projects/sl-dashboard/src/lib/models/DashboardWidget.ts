@@ -16,13 +16,13 @@ export class DashboardWidget {
   Configcomponent: Type<any>;
   ItemClick?: EventEmitter<any>;
 
-  constructor(component: Type<any>, configcomponent: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string,  Defaultconfig: WidgetConfig) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
+  constructor(component: Type<any>, configcomponent: Type<any>, IdComponent: number,  Icon: string,  Name: string,  Description: string, CustomData: any) { //, idComponent:number, Name: string, Description: string,  data: unknown) {
     this.component = component;
     this.IdComponent = IdComponent;
     this.Icon = Icon;
     this.Name = Name;
     this.Description = Description;
-    this.Config = Defaultconfig;
+    this.Config = {IdItem: "0", BackgroundColor: 'white', IdComponent: IdComponent, Top: 0, Left: 0, width: 15, height: 6,dx: 50, dy: 50, Title: Description, CustomData: CustomData }
     this.Configcomponent = configcomponent
 
   }
