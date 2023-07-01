@@ -12,7 +12,7 @@ import { DashboardConfigService } from '../../services/dashboard.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardElementComponent implements AfterViewInit {
-    private _Config?: WidgetConfig | undefined;
+
 
     @Input() Config!: WidgetConfig;
 
@@ -55,12 +55,12 @@ export class DashboardElementComponent implements AfterViewInit {
             if (model && this.Config) {
                 const componentRef = viewContainerRef.createComponent<DashboardWidget>(model.Configcomponent);
                 componentRef.instance.Config = this.Config;
-                
-                if (this.Config.CustomData) {
-                    Object.keys(this.Config.CustomData).forEach((prop) => {
-                        (componentRef.instance as any)[prop] = this.Config!.CustomData[prop];
-                    });
-                }
+
+                // if (this.Config.CustomData) {
+                //     Object.keys(this.Config.CustomData).forEach((prop) => {
+                //         (componentRef.instance as any)[prop] = this.Config!.CustomData[prop];
+                //     });
+                // }
                 this.cdr.detectChanges();
             }
         }

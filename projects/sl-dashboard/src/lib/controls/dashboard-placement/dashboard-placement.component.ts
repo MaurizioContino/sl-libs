@@ -25,6 +25,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
   @Output() ItemClicked =new EventEmitter<any>();
   @Output() SaveConfig =new EventEmitter<any>();
   @Output() DashboardSizeChanged = new EventEmitter<DashboardSize>()
+
   SavedetailsClass="";
   CanceldetailsClass="";
 
@@ -46,6 +47,13 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       return item;
     }
 
+    set SelectedConfig(value: WidgetConfig | undefined)  {
+      if (value) {
+        this.setWidgetIn(this.selectr,this.selectc, value);
+      }
+
+    }
+
     get now(): string {
       return Date.now().toString();
     }
@@ -65,6 +73,11 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
       }
       ngOnInit(): void {
         console.log("begin dashboard")
+
+        this.dashserv.RefreshRequired$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
+          this.cdr.detectChanges();
+        });
+
       }
       ngOnDestroy(): void {
         this.destroy$.next(null);
@@ -110,7 +123,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
       if (this.dashboard && model && model.component && this.selectr!==null && this.selectc!==null) {
           this.showSelect = false;
-          //this.showConfig = true;
+          this.DisplayDetails = null;
           const conf = model.cloneConfig();
           conf.IdItem = Date.now().toString();
           conf.Top = this.selectr;
@@ -121,6 +134,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
 
 
           this.dashboard.Items.push(conf);
+
          //this.cdr.detectChanges();
       }
     }
@@ -150,6 +164,11 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         }
       } else {
         return null;
+      }
+    }
+    setWidgetIn(r: number | null, c: number | null, config: WidgetConfig | null) {
+      if (this.dashboard && r !=null && c !=null && config) {
+        this.dashboard.setWidgetByPosition(r,c, config);
       }
     }
     ConfigIn(r: number, c: number): WidgetConfig | null {
@@ -188,6 +207,7 @@ export class DashboardPlacementComponent implements OnInit, AfterViewInit, OnDes
         this.selectr = e.Top;
         this.selectc = e.Left;
         this.showConfig = true;
+        this.SelectedConfig = e;
         //this.DisplayDetails = true;
       }
       this.cdr.detectChanges();

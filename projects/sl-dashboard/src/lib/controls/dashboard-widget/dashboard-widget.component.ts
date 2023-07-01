@@ -23,9 +23,12 @@ export abstract class DashboardWidgetComponent {
 
   ngOnInit(): void {
       this.dashserv.ConfigChanges$.pipe(takeUntil(this.destroy$)).subscribe(v=>{
-        if (v.IdItem==this.Config.IdItem) this.Config = v;
-        this.paint();
-        this.cdr.detectChanges();
+        if (v.IdItem==this.Config.IdItem)
+        {
+          this.Config = v;
+          this.paint();
+          this.cdr.detectChanges();
+        }
       })
   }
 

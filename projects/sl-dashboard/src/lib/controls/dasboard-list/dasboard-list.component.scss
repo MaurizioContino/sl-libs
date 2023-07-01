@@ -1,9 +1,9 @@
 .dsh-item {
   padding: 20px;
-  border: 1px solid silver;
+  border-bottom: 1px solid silver;
 }
 
 .dsh-item:hover {
-  background-color: var(--accent);
+  background-color: silver;
   color: white;
 }

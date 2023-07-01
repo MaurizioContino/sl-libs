@@ -19,13 +19,21 @@ export class Dashboard  {
         if (itm) return itm;
         else return null;
     }
-    
+    setWidgetByPosition(r: number, c: number, w: WidgetConfig) {
+      const itm = this.Items.find((w) => w.Top===r && w.Left===c);
+      if (itm) {
+        const idx = this.Items.indexOf(itm);
+        if (idx>=0) this.Items.splice(idx,1,w);
+      }
+
+  }
+
     getWidgetById(Id: string): WidgetConfig | null {
         const itm = this.Items.find((w) => w.IdItem===Id);
         if (itm) return itm;
         else return null;
     }
-    
+
     UpdateWidget(w: WidgetConfig) {
         const curr = this.Items.find(v=>v.IdItem == w.IdItem);
         if (curr)

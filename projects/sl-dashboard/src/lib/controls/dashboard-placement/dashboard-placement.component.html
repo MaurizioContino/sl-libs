@@ -26,7 +26,7 @@
     </div>
   </ng-template>
   <ng-template #hmddetails let-values>
-    <div class="detail-container" *ngIf="showSelect">
+    <div class="list-container" *ngIf="showSelect">
       <div class="h1">Selezione widget</div>
       <sl-dashboard-item-list (Selected)="InitnewWidget($event,-1,-1,null, null, null, null)"></sl-dashboard-item-list>
     </div>
@@ -41,7 +41,7 @@
       <div class="details-buttons">
         <button type="button" (click)="SaveConfigLocal()" class="{{SavedetailsClass}}">Save</button>
         <div class="header-spacer"></div>
-        <button type="button" (click)="CancelConfig()" class="{{CanceldetailsClass}}">Cancel</button>
+        <button type="button" (click)="CancelConfig()" class="{{CanceldetailsClass}}">Close</button>
       </div>
       <div config-container>
         <sl-dashboard-element *ngIf="SelectedConfig" [Config]="SelectedConfig"></sl-dashboard-element>

@@ -19,6 +19,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
 
     @Input()
     Config!: WidgetConfig;
+    ConfigChanged = new BehaviorSubject<WidgetConfig>({} as WidgetConfig);
 
     @Input() EditMode = false
 
@@ -126,6 +127,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
       this.DragDeltaWidth = 0;
       this.DragDeltaHeight = 0;
       this.componentRef.instance.Config = this.Config;
+      this.ConfigChanged.next(this.Config);
 
     }
    }
@@ -142,6 +144,7 @@ export class DashboardElementPanelComponent implements AfterViewInit, OnDestroy 
       this.Config.Top += deltay;
       this.Config.Left += deltax;
       this.card.nativeElement.style.transform = "translate3d(0px,0px," + "0px)"
+      this.ConfigChanged.next(this.Config);
     }
    }
 

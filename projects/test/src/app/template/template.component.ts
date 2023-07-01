@@ -17,7 +17,7 @@ export class TemplateComponent extends DashboardWidgetComponent  {
   }
 
   override paint(): void {
-    throw new Error('Method not implemented.');
+
   }
 
   // override ngOnInit(): void {
