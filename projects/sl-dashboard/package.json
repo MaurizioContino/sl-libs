@@ -1,6 +1,6 @@
 {
   "name": "@soloud/sldashboard",
-  "version": "1.0.40",
+  "version": "1.16.2",
   "ngPackage": {
     "lib": {
       "cssUrl": "inline",
@@ -9,9 +9,9 @@
   },
 
   "peerDependencies": {
-    "@angular/common": "^15.2.4",
-    "@angular/core": "^15.2.4",
-    "@angular/cdk": "^15.2.4",
+    "@angular/cdk": "^16.1.7",
+    "@angular/common": "^16.1.8",
+    "@angular/core": "^16.1.8",
     "ngx-scrollbar": "^11.0.0"
   },
   "dependencies": {
